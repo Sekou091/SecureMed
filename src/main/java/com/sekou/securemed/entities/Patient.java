@@ -1,5 +1,6 @@
 package com.sekou.securemed.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class Patient extends Personne{
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private Collection<Type> type = new ArrayList<>();
     @OneToMany(mappedBy = "patient")
+    @JsonIgnore
     private Collection<Ticket> ticket;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Antecedant> antecedant = new ArrayList<>();

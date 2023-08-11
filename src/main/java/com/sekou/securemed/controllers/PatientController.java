@@ -1,5 +1,6 @@
 package com.sekou.securemed.controllers;
 
+import com.sekou.securemed.entities.Medecin;
 import com.sekou.securemed.entities.Patient;
 import com.sekou.securemed.services.PatientService;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/patient")
@@ -49,5 +52,12 @@ public class PatientController {
     public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
         patientService.deletePatient(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Patient> getPatientById(@PathVariable Long id) {
+        Optional<Patient> patient = patientService.getPatientById(id);
+        return patient.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
