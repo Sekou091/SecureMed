@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service @Transactional
 public class TokenRevocationService {
-
+    @Autowired
     private final TokenRevocationRepository tokenRevocationRepository;
 
     @Autowired

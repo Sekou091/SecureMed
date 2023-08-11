@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Collection;
+
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class Hopital {
@@ -20,4 +23,8 @@ public class Hopital {
     @Column(unique = true, nullable = false)
     private String email;
     private String ville;
+    @OneToMany(mappedBy = "hopital")
+    private Collection<Ticket> ticket;
+    @OneToMany(mappedBy = "hopital")
+    private Collection<Service> service;
 }

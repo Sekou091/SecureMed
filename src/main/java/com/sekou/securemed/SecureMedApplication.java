@@ -43,13 +43,13 @@ public class SecureMedApplication {
 		return args -> {
 //			accountServices.addUser("Sékou Sow", "sowsekou091@gmail.com", "1234", "1234");
 //			accountServices.addUser("Admin", "sowsekou@hotmail.com", "1234", "1234");
-//			accountServices.addRole(new Roles(null,"MEDECIN"));
+			accountServices.addRole(new Roles(null,"MEDECIN"));
 //			accountServices.addRole(new Roles(null,"ADMIN"));
 //			accountServices.addRole(new Roles(null,"PATIENT"));
 //			accountServices.addRoleToUser("Sékou Sow", "MEDECIN");
 //			accountServices.addRoleToUser("Admin", "ADMIN");
 //			accountServices.addRoleToUser("Admin", "MEDECIN");
-			//accountServices.resetPassword("Admin", "sowsekou@hotmail.com", "1234", "12345", "12345", "");
+//			//accountServices.resetPassword("Admin", "sowsekou@hotmail.com", "1234", "12345", "12345", "");
 			//accountServices.initiatePasswordReset("Admin");
 			//accountServices.resetPassword("Admin", "123456","123456","114412");
 			//accountServices.signUp("Agetic","sowsekou091@gmail.com", "1234", "1234","74007045");
