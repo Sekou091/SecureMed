@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Patient extends Personne{
-    @Column(unique = true, nullable = false)
+
     private String code;
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private Collection<RendezVous> rendezVous = new ArrayList<>();
@@ -22,5 +22,9 @@ public class Patient extends Personne{
     private Collection<Type> type = new ArrayList<>();
     @OneToMany(mappedBy = "patient")
     private Collection<Ticket> ticket;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Antecedant> antecedant = new ArrayList<>();
+    @ManyToMany(mappedBy = "patient", fetch = FetchType.EAGER)
+    private Collection<AssuranceMedicale> assuranceMedicale = new ArrayList<>();
 
 }

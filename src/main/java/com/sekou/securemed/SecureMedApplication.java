@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
@@ -42,13 +40,13 @@ public class SecureMedApplication {
 	CommandLineRunner commandLineRunner(AccountServices accountServices){
 		return args -> {
 //			accountServices.addUser("Sékou Sow", "sowsekou091@gmail.com", "1234", "1234");
-//			accountServices.addUser("Admin", "sowsekou@hotmail.com", "1234", "1234");
-			accountServices.addRole(new Roles(null,"MEDECIN"));
-//			accountServices.addRole(new Roles(null,"ADMIN"));
+			accountServices.addUser("Admin", "sowsekou@hotmail.com", "1234", "1234");
+			accountServices.addRole(new Roles(null,"Patient"));
+			accountServices.addRole(new Roles(null,"ADMIN"));
 //			accountServices.addRole(new Roles(null,"PATIENT"));
-//			accountServices.addRoleToUser("Sékou Sow", "MEDECIN");
-//			accountServices.addRoleToUser("Admin", "ADMIN");
-//			accountServices.addRoleToUser("Admin", "MEDECIN");
+//			accountServices.addRoleToUser("Sékou Sow", "Patient");
+			accountServices.addRoleToUser("Admin", "ADMIN");
+//			accountServices.addRoleToUser("Admin", "Patient");
 //			//accountServices.resetPassword("Admin", "sowsekou@hotmail.com", "1234", "12345", "12345", "");
 			//accountServices.initiatePasswordReset("Admin");
 			//accountServices.resetPassword("Admin", "123456","123456","114412");
@@ -56,6 +54,7 @@ public class SecureMedApplication {
 			//accountServices.toggleAccount("Agetic", false);
 
 		};
+
 
 	}
 }

@@ -4,6 +4,7 @@ import com.sekou.securemed.entities.Roles;
 import com.sekou.securemed.entities.Utilisateur;
 import com.sekou.securemed.repositories.RolesRepository;
 import com.sekou.securemed.repositories.UtilisateurRepository;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Transactional
-@Data @NoArgsConstructor @Builder
+@Data @NoArgsConstructor
 public class AccountServicesImpl implements AccountServices {
     private UtilisateurRepository utilisateurRepository;
     private RolesRepository rolesRepository;
