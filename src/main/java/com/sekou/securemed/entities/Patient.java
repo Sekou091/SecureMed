@@ -7,7 +7,6 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Patient extends Personne{

@@ -36,13 +36,16 @@ public class SecureMedApplication {
 //	public void sendMail(){
 //		javaMailSenderService.sendEmail("sowsekou@hotmail.com", "Vérification en deux étapes avec OTP", "Bonjour, votre code OTP est 1252");
 //	}
-	//@Bean
+	@Bean
 	CommandLineRunner commandLineRunner(AccountServices accountServices){
 		return args -> {
 //			accountServices.addUser("Sékou Sow", "sowsekou091@gmail.com", "1234", "1234");
 			accountServices.addUser("Admin", "sowsekou@hotmail.com", "1234", "1234");
-			accountServices.addRole(new Roles(null,"Patient"));
 			accountServices.addRole(new Roles(null,"ADMIN"));
+			accountServices.addRole(new Roles(null,"MEDECIN"));
+			accountServices.addRole(new Roles(null,"CAISSIER"));
+			accountServices.addRole(new Roles(null,"RECEPTIONNISTE"));
+			accountServices.addRole(new Roles(null,"PATIENT"));
 //			accountServices.addRole(new Roles(null,"PATIENT"));
 //			accountServices.addRoleToUser("Sékou Sow", "Patient");
 			accountServices.addRoleToUser("Admin", "ADMIN");
