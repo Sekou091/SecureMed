@@ -4,6 +4,7 @@ import com.sekou.securemed.entities.Medicament;
 import com.sekou.securemed.entities.Prescription;
 import com.sekou.securemed.repositories.MedicamentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Transactional
 public class MedicamentService {
-
+    @Autowired
     private MedicamentRepository medicamentRepository;
 
     public List<Medicament> getAllMedicaments() {

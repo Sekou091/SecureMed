@@ -2,60 +2,53 @@ package com.sekou.securemed.services;
 
 import com.sekou.securemed.entities.Hopital;
 import com.sekou.securemed.repositories.HopitalRepository;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class HopitalService{
+import java.util.List;
+import java.util.Optional;
 
-    @Autowired
+@Service
+public class HopitalService {
+
     private HopitalRepository hopitalRepository;
 
-    //ajouter un hopital
-//    @Override
-//    public Hopital addHopital(Hopital hopital){
-//
-//        Hopital hopital1 = hopitalRepository.findHopitalByNomHopital(hopital.getNomHopital());
-//        if(hopital1 != null) throw new RuntimeException("Cet hopital existe déjà");
-//        hopital1 = Hopital.builder()
-//                .nomHopital(hopital.getNomHopital())
-//                .tel(hopital.getTel())
-//                .ville(hopital.getVille())
-//                .email(hopital.getEmail())
-//                .adresse(hopital.getAdresse())
-//                .codePostal(hopital.getCodePostal())
-//                .build();
-//        Hopital savedHopital = hopitalRepository.save(hopital1);
-//        return savedHopital;
-//    }
-
-    public Hopital addHopital(Hopital hopital){
-
-        Hopital hopital1 = hopitalRepository.findHopitalByNomHopital(hopital.getNomHopital());
-
-        if(hopital1 != null) throw new RuntimeException(String.format("L'hopital %s existe déjà", hopital.getNomHopital()));
-        try{
-            return hopitalRepository.save(hopital);
-        }catch(Exception e){
-
-            throw new RuntimeException("Erreur d'enregistrement de l'hopital");
-        }
+    @Autowired
+    public HopitalService(HopitalRepository hopitalRepository) {
+        this.hopitalRepository = hopitalRepository;
     }
 
-    String returnHopitalEmail(String nomHopital){
+    public List<Hopital> getAllHopitals() {
+        return hopitalRepository.findAll();
+    }
 
-        Hopital hopital = hopitalRepository.findHopitalByEmail(nomHopital);
+    public Optional<Hopital> getHopitalById(Long id) {
+        return hopitalRepository.findById(id);
+    }
 
-        if(hopital == null) {
-            return "Cet hopital n'existe pas!";
-        }else {
-            return hopitalRepository.findHopitalByNomHopital(nomHopital).getEmail();
+    public Hopital saveHopital(Hopital hopital) {
+        return hopitalRepository.save(hopital);
+    }
+
+    public void deleteHopital(Long id) {
+        hopitalRepository.deleteById(id);
+    }
+
+    public Hopital updateHopital(Long id, Hopital updatedHopital) {
+        Optional<Hopital> optionalHopital = hopitalRepository.findById(id);
+
+        if (optionalHopital.isPresent()) {
+            Hopital existingHopital = optionalHopital.get();
+            existingHopital.setNomHopital(updatedHopital.getNomHopital());
+            existingHopital.setAdresse(updatedHopital.getAdresse());
+            existingHopital.setEmail(updatedHopital.getEmail());
+            existingHopital.setCodePostal(updatedHopital.getCodePostal());
+            existingHopital.setTel(updatedHopital.getTel());
+            existingHopital.setVille(updatedHopital.getVille());
+
+            return hopitalRepository.save(existingHopital);
+        } else {
+            throw new RuntimeException("Hôpital non trouvé");
         }
-
     }
 }

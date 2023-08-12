@@ -4,6 +4,7 @@ import com.sekou.securemed.entities.Consultation;
 import com.sekou.securemed.entities.ExamenRadiologique;
 import com.sekou.securemed.repositories.ExamenRadiologiqueRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Transactional
 public class ExamenRadiologiqueService {
-
+    @Autowired
     private ExamenRadiologiqueRepository examenRadiologiqueRepository;
 
     public List<ExamenRadiologique> getAllExamensRadiologiques() {

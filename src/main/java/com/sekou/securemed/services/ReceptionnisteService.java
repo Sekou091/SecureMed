@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +19,9 @@ import java.util.Optional;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class ReceptionnisteService {
 
-
+    @Autowired
     private ReceptionnisteRepository receptionnisteRepository;
+    @Autowired
     private AccountServicesImpl accountServices;
 
     public Receptionniste addReceptionniste(Receptionniste receptionniste) {
