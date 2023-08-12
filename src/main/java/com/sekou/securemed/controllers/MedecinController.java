@@ -13,7 +13,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:8085")
 @RequestMapping("/api/medecin")
 public class MedecinController {
-    private final MedecinService medecinService;
+    private MedecinService medecinService;
 
     @Autowired
     public MedecinController(MedecinService medecinService) {

@@ -36,7 +36,7 @@ public class SecureMedApplication {
 //	public void sendMail(){
 //		javaMailSenderService.sendEmail("sowsekou@hotmail.com", "Vérification en deux étapes avec OTP", "Bonjour, votre code OTP est 1252");
 //	}
-	@Bean
+	//@Bean
 	CommandLineRunner commandLineRunner(AccountServices accountServices){
 		return args -> {
 //			accountServices.addUser("Sékou Sow", "sowsekou091@gmail.com", "1234", "1234");

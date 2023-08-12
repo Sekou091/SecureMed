@@ -34,7 +34,7 @@ public class MedecinService {
 
         String baseCode = "MED";
         String randomCode;
-        String codeMedecin = null; // Initialize the variable
+        String codeMedecin = null;
 
         boolean codeExists = true;
         while (codeExists) {
