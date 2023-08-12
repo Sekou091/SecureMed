@@ -10,6 +10,4 @@ public class ExamenRadiologique extends AnalyseMedicale {
 
     private String designation;
     private String resultat;
-
-
 }
