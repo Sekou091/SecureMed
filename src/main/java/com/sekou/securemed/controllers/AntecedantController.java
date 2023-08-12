@@ -4,6 +4,7 @@ import com.sekou.securemed.entities.Antecedant;
 import com.sekou.securemed.services.AntecedantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class AntecedantController {
     public AntecedantController(AntecedantService antecedantService) {
         this.antecedantService = antecedantService;
     }
-
+    @PreAuthorize("hasAuthority('ADMIN', 'RECEPTIONNISTE', 'MEDECIN')")
     @PostMapping("/add-antecedant")
     public ResponseEntity<Antecedant> addAntecedant(@RequestBody Antecedant antecedant) {
         Antecedant addedAntecedant = antecedantService.addAntecedant(antecedant);
@@ -28,6 +29,7 @@ public class AntecedantController {
     }
 
     @GetMapping("/list")
+    @PreAuthorize("hasAuthority('ADMIN', 'RECEPTIONNISTE', 'CAISSIER', 'PATIENT')")
     public ResponseEntity<List<Antecedant>> getAllAntecedants() {
         List<Antecedant> antecedants = antecedantService.getAllAntecedants();
         return ResponseEntity.ok(antecedants);

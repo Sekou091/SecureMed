@@ -57,15 +57,18 @@ public class AccountController {
         this.tokenRevocationService = tokenRevocationService;
         this.tokenRevocationRepository =tokenRevocationRepository;
     }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("loadUser/{username}")
     public ResponseEntity<Utilisateur> loadUser(@PathVariable String username){
         return ResponseEntity.ok(accountServices.loadUtilisateurByUsername(username));
     }
-    @GetMapping("allUsers")
     @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("allUsers")
     public ResponseEntity<List<Utilisateur>> allUsers(){
         return ResponseEntity.ok(accountServices.listOfUsers());
     }
+
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@RequestBody String token) {
@@ -127,7 +130,7 @@ public class AccountController {
                 .defaultIfEmpty(ResponseEntity.status(400).body("Validation de l'OTP échouée"));
     }
     @PostMapping("/addNewUser")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN', 'RECEPTIONNISTE')")
     public ResponseEntity<?> addNewUser(@RequestBody RegistrationRequest registrationRequest){
         try{
             Utilisateur utilisateur = accountServices.addUser(registrationRequest.getUsername(),
@@ -141,7 +144,7 @@ public class AccountController {
         }
     }
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN', 'RECEPTIONNISTE', 'CAISSIER', 'PATIENT', 'MEDECIN')")
     public ResponseEntity<Utilisateur> updateUser(@PathVariable Long id, @RequestBody Utilisateur utilisateur) {
         utilisateur.setId(id);
         Utilisateur updatedUser = accountServices.updateUser(utilisateur);
@@ -156,10 +159,12 @@ public class AccountController {
     }
 
     @PostMapping("/loadUserByEmail/{email}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Utilisateur> loadUserByEmail(@PathVariable String email){
 
         return ResponseEntity.ok(accountServices.loadUtilisateurByEmail(email));
     }
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/activerOuDesactiverCompte")
     public void activerOuDesactiverCompte(@RequestBody ActiverOuDesactiverUtilisateurData toggleAccount){
 
@@ -167,18 +172,21 @@ public class AccountController {
     }
 
     @GetMapping("/loadUserByUsername/{username}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Utilisateur> getUserByUsername(@PathVariable String username) {
         Utilisateur utilisateur = accountServices.loadUtilisateurByUsername(username);
         return ResponseEntity.ok(utilisateur);
     }
 
     @PostMapping("/roles/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Roles> addRole(@RequestBody Roles roles) {
         Roles role = accountServices.addRole(roles);
         return ResponseEntity.ok(role);
     }
 
-    @PutMapping("/roles/update/{id}")
+    @PostMapping("/roles/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Roles> updateRole(@PathVariable Long id, @RequestBody Roles roles) {
         roles.setId(id);
         Roles updatedRole = accountServices.updateRole(id, roles);
@@ -186,12 +194,14 @@ public class AccountController {
     }
 
     @PostMapping("/roles/delete/{roleName}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> deleteRole(@PathVariable String roleName) {
         accountServices.deleteRole(roleName);
         return ResponseEntity.ok("Role supprimé avec succès: " + roleName);
     }
 
     @GetMapping("/roles/list-roles")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<Roles>> listOfRoles() {
         List<Roles> roles = accountServices.listOfRoles();
         return ResponseEntity.ok(roles);
@@ -216,12 +226,14 @@ public class AccountController {
     }
 
     @PostMapping("/add-role-to-user")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> addRoleToUser(@RequestBody UserRoleRequest userRoleRequest) {
         accountServices.addRoleToUser(userRoleRequest.getUsername(), userRoleRequest.getRoleName());
         return ResponseEntity.ok("Rôle ajouté à l'utilisateur avec succès");
     }
 
     @PostMapping("/remove-role-to-user")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> removeRoleToUser(@RequestBody UserRoleRequest userRoleRequest) {
         accountServices.removeRoleToUser(userRoleRequest.getUsername(), userRoleRequest.getRoleName());
         return ResponseEntity.ok("Rôle retiré de l'utilisateur avec succès");
