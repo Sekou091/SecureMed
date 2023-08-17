@@ -39,17 +39,16 @@ public class SecureMedApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(AccountServices accountServices){
 		return args -> {
-//			accountServices.addUser("Sékou Sow", "sowsekou091@gmail.com", "1234", "1234");
+			//accountServices.addUser("Sékou Sow", "sowsekou091@gmail.com", "1234", "1234");
 			accountServices.addUser("Admin", "sowsekou@hotmail.com", "1234", "1234");
 			accountServices.addRole(new Roles(null,"ADMIN"));
-			accountServices.addRole(new Roles(null,"MEDECIN"));
-			accountServices.addRole(new Roles(null,"CAISSIER"));
-			accountServices.addRole(new Roles(null,"RECEPTIONNISTE"));
-			accountServices.addRole(new Roles(null,"PATIENT"));
+//			accountServices.addRole(new Roles(null,"MEDECIN"));
+//			accountServices.addRole(new Roles(null,"CAISSIER"));
+//			accountServices.addRole(new Roles(null,"RECEPTIONNISTE"));
 //			accountServices.addRole(new Roles(null,"PATIENT"));
-//			accountServices.addRoleToUser("Sékou Sow", "Patient");
+			//accountServices.addRoleToUser("Sékou Sow", "PATIENT");
 			accountServices.addRoleToUser("Admin", "ADMIN");
-//			accountServices.addRoleToUser("Admin", "Patient");
+//			accountServices.addRoleToUser("Admin", "PATIENT");
 //			//accountServices.resetPassword("Admin", "sowsekou@hotmail.com", "1234", "12345", "12345", "");
 			//accountServices.initiatePasswordReset("Admin");
 			//accountServices.resetPassword("Admin", "123456","123456","114412");

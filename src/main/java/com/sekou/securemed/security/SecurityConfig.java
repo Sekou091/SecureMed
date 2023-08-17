@@ -58,6 +58,7 @@ public class SecurityConfig{
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/utilisateurs/login").permitAll()
+                .requestMatchers("/api/utilisateurs/sign-up").permitAll()
                 .requestMatchers("/api/utilisateurs/sendOTPToUser").permitAll()
                 .requestMatchers("/api/utilisateurs/validateOTP").permitAll()
                 .requestMatchers("/api/utilisateurs/addNewUser").hasAuthority("ADMIN")

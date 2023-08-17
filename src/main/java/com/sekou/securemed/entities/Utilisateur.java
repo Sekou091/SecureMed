@@ -26,5 +26,5 @@ public class Utilisateur {
     @Column(unique = true, nullable = false)
     private String email;
     @ManyToMany(fetch=FetchType.EAGER)
-    private Collection<Roles> roles;
+    private Collection<Roles> roles = new ArrayList<>();
 }

@@ -130,7 +130,7 @@ public class AccountController {
                 .defaultIfEmpty(ResponseEntity.status(400).body("Validation de l'OTP échouée"));
     }
     @PostMapping("/addNewUser")
-    @PreAuthorize("hasAuthority('ADMIN', 'RECEPTIONNISTE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> addNewUser(@RequestBody RegistrationRequest registrationRequest){
         try{
             Utilisateur utilisateur = accountServices.addUser(registrationRequest.getUsername(),
@@ -144,7 +144,7 @@ public class AccountController {
         }
     }
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasAuthority('ADMIN', 'RECEPTIONNISTE', 'CAISSIER', 'PATIENT', 'MEDECIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Utilisateur> updateUser(@PathVariable Long id, @RequestBody Utilisateur utilisateur) {
         utilisateur.setId(id);
         Utilisateur updatedUser = accountServices.updateUser(utilisateur);
